@@ -68,7 +68,7 @@ public interface ITextMutableObject
 				f.setAccessible(true);
 				
 				//Obtenemos el nombre del atributo y su informacion. Por ultimo concatenamos.
-				information = information + f.getName() + " = " + f.get(object) + "; ";
+				information = information + f.getName() + " = " + f.get(object) + ", ";
 			} 
 			catch (IllegalArgumentException | IllegalAccessException e)
 			{
