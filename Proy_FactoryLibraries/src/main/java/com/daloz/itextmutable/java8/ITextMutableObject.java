@@ -1,4 +1,4 @@
-package com.daloz.itextmutable;
+package com.daloz.itextmutable.java8;
 
 import java.lang.reflect.Field;
 
