@@ -19,6 +19,7 @@ import java.util.List;
 public final class ReaperConditions
 {
 	String condition;
+	Boolean isLike;
 	Object object;
 	List<String> listAttributeNames, listMethodNames;
 	List<Object> listValueAttribute;
@@ -27,10 +28,11 @@ public final class ReaperConditions
 	 * Se privatiza el constructor para
 	 * evitar que se instancie...
 	 */
-	public ReaperConditions(String condition, Object object)
+	public ReaperConditions(String condition, Object object, Boolean isLike)
 	{
 		this.condition = condition;
 		this.object = object;
+		this.isLike = isLike;
 	}
 	
 	
@@ -53,7 +55,7 @@ public final class ReaperConditions
 	
 	
 	/**
-	 * 
+	 * Obtenemos el nombre de cada atributo en la condicion
 	 * @param condition: Es la condicion para la consulta
 	 * @return
 	 */
@@ -121,7 +123,14 @@ public final class ReaperConditions
 				Method method = object.getClass().getMethod(listMethodNames.get(i));
 				Object objectValue = method.invoke(object, new Object[]{});			
 				
-				listValueAttribute.add(objectValue);
+				if(isLike)
+				{
+					listValueAttribute.add(objectValue.toString()+"%");
+				}
+				else
+				{
+					listValueAttribute.add(objectValue);
+				}
 			}
 		} 
 		catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
